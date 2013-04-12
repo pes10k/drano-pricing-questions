@@ -29,7 +29,7 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Domain</th>
-                            <th>Num Broad Rules</th>
+                            <th>Severity</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -39,7 +39,7 @@
                                 <td><?=(++$index)?></td>
                                 <td><?=$row['name']?></td>
                                 <td><?=$row['domain']?></td>
-                                <td><?=count($row['broad_rules'])?></td>
+                                <td><?=$row['severity']?></td>
                                 <td>
                                     <a class="btn" href="<?=rule_path($row)?>">Edit</a>
                                 </td>

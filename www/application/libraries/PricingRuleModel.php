@@ -13,8 +13,7 @@ class PricingRuleModel extends MongoModel {
             $record['uid'] = str_replace(' ', '_', strtolower($record['name']));
         }
 
-        $record = array_common_keys($record, $this->allowed_fields());
-        return $this->collection()->insert($record);
+        parent::insert($record);
     }
 
     protected function allowed_fields() {
@@ -26,6 +25,7 @@ class PricingRuleModel extends MongoModel {
             'narrow_rule',
             'narrow_rule_is_regex',
             'domain',
+            'severity',
         );
     }
 
