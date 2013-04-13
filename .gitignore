@@ -1,0 +1,4 @@
+www/application/config/config.php
+www/application/cache
+www/application/log
+.htpasswd

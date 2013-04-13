@@ -2,17 +2,17 @@
 
 abstract class MongoModel {
 
-    protected $client = NULL;
-    protected $db = NULL;
+    static protected $client = NULL;
+    static protected $db = NULL;
 
-    protected function db() {
+    static protected function db() {
 
-        if (!$this->db) {
-            $this->client = new MongoClient();
-            $this->db = $this->client->drano;
+        if (self::$client === NULL) {
+            self::$client = new MongoClient();
+            self::$db = self::$client->drano;
         }
 
-        return $this->db;
+        return self::$db;
     }
 
     public function get($id)

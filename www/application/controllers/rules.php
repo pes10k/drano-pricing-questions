@@ -8,14 +8,16 @@ class Rules extends PES_Controller {
 
         if (!empty($_POST['submit']))
         {
-            if ($model->insert($_POST))
+            $fields = $this->_prepareFields($_POST);
+
+            if ($model->insert($fields))
             {
                 $this->set_data('alert_success', 'New rule successfully created');
             }
         }
 
 		$this
-            ->set_data('rule_form', $this->_partial('rule_form', array('rule' => array())))
+            ->set_data('rule_form', $this->_ruleForm())
             ->set_data('page_title', 'Pricing Rules')
             ->set_data('rules', $model->index());
 	}
@@ -42,7 +44,8 @@ class Rules extends PES_Controller {
             }
             elseif (!empty($_POST['submit']))
             {
-                if ($model->update($id, $_POST))
+                $fields = $this->_prepareFields($_POST);
+                if ($model->update($id, $fields))
                 {
                     $this->session->set_flashdata('alert_info', 'Rule successfully updated');
                     redirect('rules/edit/'.$id);
@@ -50,9 +53,51 @@ class Rules extends PES_Controller {
             }
 
             $this
-                ->set_data('rule_form', $this->_partial('rule_form', array('rule' => $row)))
+                ->set_data('rule_form', $this->_ruleForm($row))
                 ->set_data('page_title', 'Edit "' . $row['name'] . '"')
                 ->set_data('rule', $row);
         }
+    }
+
+    protected function _prepareFields($values) {
+
+        $values['narrow_rule_is_regex'] = !empty($values['narrow_rule_is_regex']);
+        $values['broad_rules'] = explode("\n", $values['broad_rules']);
+
+        if (empty($values['severity']) OR $values['severity'] !== 'Email plus')
+        {
+            unset($values['extra_factor']);
+            unset($values['new_extra_factor']);
+        }
+        else
+        {
+            if (empty($values['extra_factor']))
+            {
+                $values['extra_factor'] = $values['new_extra_factor'];
+            }
+            else
+            {
+                unset($values['new_extra_factor']);
+            }
+        }
+
+        return $values;
+    }
+
+    protected function _ruleForm($rule = array())
+    {
+        $model = new PricingRuleModel();
+
+        $extra_factors = $model->extraFactors();
+        $options = count($extra_factors) ? array_to_assoc($extra_factors) : array();
+        $options = array_merge(array(' - Select One - '), $options);
+
+        $this->add_script('pages/rules_form.jquery.js');
+
+        return $this->_partial('rule_form', array(
+            'rule' => $rule,
+            'extra_factors_options' => $options,
+        ));
+
     }
 }

@@ -6,11 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="<?=static_url('css/bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?=static_url('css/bootstrap-responsive.min.css')?>" rel="stylesheet">
+    <link href="<?=static_url('css/styles.css')?>" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
   <body data-spy="scroll" data-target=".subnav" data-offset="57">
+    <div class="navbar navbar-static-top">
+      <div class="navbar-inner">
+        <a class="brand" href="#">Drano Pricing Rules</a>
+        <ul class="nav">
+          <li><a href="/">Index Page</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="container" id="main-container">
 
       <?php if (!empty($alert_error)): ?>
@@ -44,7 +53,7 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     <script src="<?=static_url('js/bootstrap.min.js')?>"></script>
     <?php foreach ($additional_scripts as $script): ?>
-      <script src="<?=base_url('js/' . $script)?>"></script>
+      <script src="<?=static_url('js/'.$script)?>"></script>
     <?php endforeach; ?>
   </body>
 </html>

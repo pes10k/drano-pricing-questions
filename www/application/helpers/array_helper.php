@@ -10,3 +10,9 @@ function array_common_keys($array, $keys) {
     }
     return $new_array;
 }
+
+function array_to_assoc($array) {
+
+    $values = array_values($array);
+    return array_combine($values, $values);
+}
