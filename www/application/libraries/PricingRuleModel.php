@@ -86,7 +86,8 @@ class PricingRuleModel extends MongoModel {
                 array('$unset' => array('extra_factor' => 1))
             );
 
-            if ($fields['extra_factor']) {
+
+	    if (isset($fields['extra_factor'])) {
                 unset($fields['extra_factor']);
             }
 

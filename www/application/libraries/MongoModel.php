@@ -37,7 +37,8 @@ abstract class MongoModel {
     public function insert($record)
     {
         $record = array_common_keys($record, $this->allowed_fields());
-        return $this->collection()->insert($record);
+        $rs = $this->collection()->insert($record);
+        return empty($rs['err']) ? $record['_id'] : FALSE;
     }
 
     abstract protected function allowed_fields();
