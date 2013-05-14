@@ -1,3 +1,4 @@
+www/static/img/favicons/*.png
 www/application/config/config.php
 www/application/cache
 www/application/log

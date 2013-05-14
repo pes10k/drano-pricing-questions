@@ -7,8 +7,8 @@
                     <?=$rule_form?>
 
                     <div class="form-actions">
-                        <button class="btn btn-warning" name="delete" id="delete" value="delete" type="submit">Delete</button>
                         <button class="btn btn-primary" name="submit" id="submit" value="submit" type="submit">Save</button>
+                        <button class="btn btn-warning" name="delete" id="delete" value="delete">Delete</button>
                     </div>
                 </fieldset>
             </form>

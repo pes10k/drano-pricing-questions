@@ -7,7 +7,7 @@ class PricingRuleModel extends MongoModel {
         return $this->collection()->find()->sort(array('name' => 1));
     }
 
-    public function insert($fields) {
+    public function insert(&$fields) {
 
         if (empty($fields['uid'])) {
             $uid = preg_replace('/\W/', '', $fields['name']);
@@ -18,14 +18,20 @@ class PricingRuleModel extends MongoModel {
         $fields['created'] = new MongoDate();
         $fields['updated'] = $fields['created'];
 
-        $id = parent::insert($fields);
-        $this->processExtraFactor($id, $fields);
+        if (!parent::insert($fields)) {
 
-        if (!empty($fields['price'])) {
-            $this->addPrice($id, $fields['price']);
+            return FALSE;
+
+        } else {
+
+            $this->processExtraFactor($fields['_id'], $fields);
+
+            if (!empty($fields['price'])) {
+                $this->addPrice($fields['_id'], $fields['price']);
+            }
+
+            return TRUE;
         }
-
-        return $id;
     }
 
     public function update($id, $fields) {
@@ -43,8 +49,9 @@ class PricingRuleModel extends MongoModel {
 
             $current_record = $this->get($id);
 
-            if (!empty($current_record['prices'])) {
-
+            if (empty($current_record['prices'])) {
+                $this->addPrice($id, $new_price);
+            } else {
                 $prices = $current_record['prices'];
                 $most_recent_price = $prices[count($prices) - 1]['price'];
 

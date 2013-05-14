@@ -34,11 +34,12 @@ abstract class MongoModel {
         );
     }
 
-    public function insert($record)
+    public function insert(&$record)
     {
-        $record = array_common_keys($record, $this->allowed_fields());
-        $rs = $this->collection()->insert($record);
-        return empty($rs['err']) ? $record['_id'] : FALSE;
+        $filtered_record = array_common_keys($record, $this->allowed_fields());
+        $rs = $this->collection()->insert($filtered_record);
+        $record = $filtered_record;
+        return empty($rs['err']);
     }
 
     abstract protected function allowed_fields();

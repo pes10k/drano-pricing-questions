@@ -12,6 +12,7 @@ class Rules extends PES_Controller {
 
             if ($model->insert($fields))
             {
+                rule_update_favicon($fields);
                 $this->set_data('alert_success', 'New rule successfully created');
             }
         }
@@ -38,6 +39,7 @@ class Rules extends PES_Controller {
             {
                 if ($model->delete($id))
                 {
+                    rule_delete_favicon($id);
                     $this->session->set_flashdata('alert_info', 'Rule successfully deleted');
                     redirect('');
                 }
@@ -47,6 +49,8 @@ class Rules extends PES_Controller {
                 $fields = $this->_prepareFields($_POST);
                 if ($model->update($id, $fields))
                 {
+                    $fields['_id'] = $id;
+                    rule_update_favicon($fields);
                     $this->session->set_flashdata('alert_info', 'Rule successfully updated');
                     redirect('rules/edit/'.$id);
                 }
@@ -98,6 +102,5 @@ class Rules extends PES_Controller {
             'rule' => $rule,
             'extra_factors_options' => $options,
         ));
-
     }
 }
