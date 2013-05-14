@@ -34,8 +34,24 @@ class PricingRuleModel extends MongoModel {
         $rs = parent::update($id, $fields);
         $this->processExtraFactor($id, $fields);
 
+        // Check to see if the newly submitted price is different than the
+        // most recent price we have for the pricing rule.  Only updaste it
+        // if it is.
         if (!empty($fields['price'])) {
-            $this->addPrice($id, $fields['price']);
+
+            $new_price = (float)$fields['price'];
+
+            $current_record = $this->get($id);
+
+            if (!empty($current_record['prices'])) {
+
+                $prices = $current_record['prices'];
+                $most_recent_price = $prices[count($prices) - 1]['price'];
+
+                if ($most_recent_price !== $new_price) {
+                    $this->addPrice($id, $new_price);
+                }
+            }
         }
 
         return $rs;
@@ -46,7 +62,7 @@ class PricingRuleModel extends MongoModel {
         return $this->collection()->update(
             array('_id' => new MongoId($id)),
             array('$push' => array('prices' => array(
-                'price' => $price,
+                'price' => (float)$price,
                 'date' => new MongoDate(),
             )))
         );

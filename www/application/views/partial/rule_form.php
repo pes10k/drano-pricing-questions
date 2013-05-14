@@ -24,7 +24,7 @@
 
 <label for="price">Price</label>
 <?php if ($prices = get_val($rule, 'prices')): ?>
-    $<input type="text" name="price" id="price" placeholder="X.XX" value="<?=$prices[count($prices) - 1]['price']?>">
+    $<input type="text" name="price" id="price" placeholder="X.XX" value="<?=number_format($prices[count($prices) - 1]['price'], 2)?>">
 <?php else: ?>
     $<input type="text" name="price" id="price" placeholder="X.XX" value="">
 <?php endif; ?>
