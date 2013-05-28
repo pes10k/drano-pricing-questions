@@ -70,20 +70,16 @@ class Rules extends PES_Controller {
 
         if (empty($values['severity']) OR $values['severity'] !== 'Email plus')
         {
-            unset($values['extra_factor']);
-            unset($values['new_extra_factor']);
+            $values['extra_factors'] = array();
         }
         else
         {
-            if (empty($values['extra_factor']))
-            {
-                $values['extra_factor'] = $values['new_extra_factor'];
-            }
-            else
-            {
-                unset($values['new_extra_factor']);
-            }
+            $values['extra_factors'] = explode(',', $values['extra_factors_values']);
         }
+
+        $values['more_email_info'] = empty($values['more_email_info_values'])
+            ? array()
+            : explode(',', $values['more_email_info_values']);
 
         return $values;
     }
@@ -92,15 +88,22 @@ class Rules extends PES_Controller {
     {
         $model = new PricingRuleModel();
 
-        $extra_factors = $model->extraFactors();
-        $options = count($extra_factors) ? array_to_assoc($extra_factors) : array();
-        $options = array_merge(array(' - Select One - '), $options);
-
         $this->add_script('pages/rules_form.jquery.js');
+
+        if (empty($rule['extra_factors']))
+        {
+            $rule['extra_factors'] = array();
+        }
+
+        if (empty($rule['more_email_info']))
+        {
+            $rule['more_email_info'] = array();
+        }
 
         return $this->_partial('rule_form', array(
             'rule' => $rule,
-            'extra_factors_options' => $options,
+            'more_email_info' => $model->allAdditionalEmailInfo(),
+            'extra_factors' => $model->allSecurityMethods(),
         ));
     }
 }

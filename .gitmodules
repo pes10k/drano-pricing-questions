@@ -1,0 +1,3 @@
+[submodule "www/static/tagmanager"]
+	path = www/static/tagmanager
+	url = https://github.com/max-favilli/tagmanager

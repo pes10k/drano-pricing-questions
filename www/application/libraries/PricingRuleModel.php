@@ -75,14 +75,20 @@ class PricingRuleModel extends MongoModel {
         );
     }
 
-    public function extraFactors() {
+    public function allSecurityMethods() {
 
-        return $this->collection()->distinct('extra_factor');
+        return $this->collection()->distinct('extra_factors');
+    }
+
+    public function allAdditionalEmailInfo() {
+
+        return $this->collection()->distinct('more_email_info');
     }
 
     protected function allowed_fields() {
 
         return array(
+            'more_email_info',
             'name',
             'uid',
             'broad_rules',
@@ -90,7 +96,7 @@ class PricingRuleModel extends MongoModel {
             'narrow_rule_is_regex',
             'domain',
             'severity',
-            'extra_factor',
+            'extra_factors',
         );
     }
 

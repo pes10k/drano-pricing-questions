@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="<?=static_url('css/bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?=static_url('css/bootstrap-responsive.min.css')?>" rel="stylesheet">
+    <link href="<?=static_url('tagmanager/bootstrap-tagmanager.css')?>" rel="stylesheet">
     <link href="<?=static_url('css/styles.css')?>" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script>
+      window.drano = {m:{}};
+    </script>
   </head>
   <body data-spy="scroll" data-target=".subnav" data-offset="57">
     <div class="navbar navbar-static-top">
@@ -50,8 +54,10 @@
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
     <script src="<?=static_url('js/bootstrap.min.js')?>"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <script src="<?=static_url('tagmanager/bootstrap-tagmanager.js')?>"></script>
     <?php foreach ($additional_scripts as $script): ?>
       <script src="<?=static_url('js/'.$script)?>"></script>
     <?php endforeach; ?>

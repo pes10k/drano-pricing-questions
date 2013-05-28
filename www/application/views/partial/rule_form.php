@@ -12,15 +12,15 @@
 <span class="help-block">The level of access to a remote account that rule represents.  <strong>Password given</strong> indicates that the password for the remote account is already transmited in the clear and exists in the email account. <strong>Email only</strong> means that access to the email account is enough to gain access to the remote account.  <strong>Email plus</strong> denotes that some additional information or factors are needed to gain access to the remote account.</span>
 
 <div id="email-plus-fields" class="well">
-    <label for="extra_factor">Existing Extra Factor</label>
-    <?=form_dropdown('extra_factor', $extra_factors_options, get_val($rule, 'extra_factor'),
-        'id="extra_factor"')?>
-    <span class="help-block">Select an existing extra factor to describe the additional factors needed to gain access to this account, in addition to control of this email account</span>
-
-    <label for="new_extra_factor">New Extra Factor</label>
-    <input type="text" id="new_extra_factor" name="new_extra_factor">
-    <span class="help-block">Create a new factor to describe what else is needed to gain access to this account, in addition to control of the exisitng email account.  <strong>Note</strong> that if a value is selected from the above field, this value will be ignored.</span>
+    <label for="extra_factors">Extra Factors</label>
+    <input type="text" name="extra_factors" id="extra_factors" placeholder="Additional Factors" autocomplete="off" data-items="6" class="tagManager" value="<?=implode(',', array_map('trim', get_val($rule, 'extra_factors')))?>">
+    <span class="help-block">Record any additional security factors this site uses to control access to this account (such as <em>2 factor authentication</em>)</span>
 </div>
+
+<label for="more_email_info">Included Info in Emails</label>
+<input type="text" name="more_email_info" id="more_email_info" placeholder="Included Info" autocomplete="off" data-items="6" class="tagManager" value="<?=implode(',', array_map('trim', get_val($rule, 'more_email_info')))?>">
+<span class="help-block">What information, other than account access, is included in emails sent from this source? For example, <em>social security number</em>, <em>birthday</em> or <em>address</em>.</span>
+
 
 <label for="price">Price</label>
 <?php if ($prices = get_val($rule, 'prices')): ?>
@@ -41,3 +41,8 @@
 <label class="checkbox">
     <input type="checkbox" name="narrow_rule_is_regex" id="narrow_rule_is_regex" value="1" <?=(get_val($rule, 'narrow_rule_is_regex') ? 'checked="checked"' : '')?>> Narrow rule is regular expression
 </label>
+
+<script>
+    drano.m.extra_factors = <?=json_encode($extra_factors)?>;
+    drano.m.more_email_info = <?=json_encode($more_email_info)?>;
+</script>
