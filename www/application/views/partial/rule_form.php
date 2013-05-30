@@ -11,11 +11,9 @@
     get_val($rule, 'severity'), 'id="severity"')?>
 <span class="help-block">The level of access to a remote account that rule represents.  <strong>Password given</strong> indicates that the password for the remote account is already transmited in the clear and exists in the email account. <strong>Email only</strong> means that access to the email account is enough to gain access to the remote account.  <strong>Email plus</strong> denotes that some additional information or factors are needed to gain access to the remote account.</span>
 
-<div id="email-plus-fields" class="well">
-    <label for="extra_factors">Extra Factors</label>
-    <input type="text" name="extra_factors" id="extra_factors" placeholder="Additional Factors" autocomplete="off" data-items="6" class="tagManager" value="<?=implode(',', array_map('trim', get_val($rule, 'extra_factors')))?>">
-    <span class="help-block">Record any additional security factors this site uses to control access to this account (such as <em>2 factor authentication</em>)</span>
-</div>
+<label for="extra_factors">Extra Factors</label>
+<input type="text" name="extra_factors" id="extra_factors" placeholder="Additional Factors" autocomplete="off" data-items="6" class="tagManager" value="<?=implode(',', array_map('trim', get_val($rule, 'extra_factors')))?>">
+<span class="help-block">Record any additional security factors this site uses to control access to this account (such as <em>2 factor authentication</em>)</span>
 
 <label for="more_email_info">Included Info in Emails</label>
 <input type="text" name="more_email_info" id="more_email_info" placeholder="Included Info" autocomplete="off" data-items="6" class="tagManager" value="<?=implode(',', array_map('trim', get_val($rule, 'more_email_info')))?>">

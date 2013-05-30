@@ -24,8 +24,6 @@ class PricingRuleModel extends MongoModel {
 
         } else {
 
-            $this->processExtraFactor($fields['_id'], $fields);
-
             if (!empty($fields['price'])) {
                 $this->addPrice($fields['_id'], $fields['price']);
             }
@@ -38,7 +36,6 @@ class PricingRuleModel extends MongoModel {
 
         $fields['updated'] = new MongoDate();
         $rs = parent::update($id, $fields);
-        $this->processExtraFactor($id, $fields);
 
         // Check to see if the newly submitted price is different than the
         // most recent price we have for the pricing rule.  Only updaste it
@@ -103,27 +100,5 @@ class PricingRuleModel extends MongoModel {
     protected function collection() {
 
         return MongoModel::db()->pricing_rules;
-    }
-
-    protected function processExtraFactor($id, &$fields) {
-
-        if (empty($fields['severity']) OR $fields['severity'] !== 'Email plus' OR
-            empty($fields['extra_factor'])) {
-
-            $rs = $this->collection()->update(
-                array('_id' => new MongoId($id)),
-                array('$unset' => array('extra_factor' => 1))
-            );
-
-
-	    if (isset($fields['extra_factor'])) {
-                unset($fields['extra_factor']);
-            }
-
-        } else {
-
-            $this->collection()->update($id, array('extra_factor' => $fields['extra_factor']));
-
-        }
     }
 }

@@ -67,16 +67,7 @@ class Rules extends PES_Controller {
 
         $values['narrow_rule_is_regex'] = !empty($values['narrow_rule_is_regex']);
         $values['broad_rules'] = explode("\n", $values['broad_rules']);
-
-        if (empty($values['severity']) OR $values['severity'] !== 'Email plus')
-        {
-            $values['extra_factors'] = array();
-        }
-        else
-        {
-            $values['extra_factors'] = explode(',', $values['extra_factors_values']);
-        }
-
+        $values['extra_factors'] = explode(',', $values['extra_factors_values']);
         $values['more_email_info'] = empty($values['more_email_info_values'])
             ? array()
             : explode(',', $values['more_email_info_values']);
