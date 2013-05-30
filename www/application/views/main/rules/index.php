@@ -30,6 +30,7 @@
                             <th>Name</th>
                             <th>Domain</th>
                             <th>Severity</th>
+                            <th>Factors</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -40,6 +41,7 @@
                                 <td><?=$row['name']?></td>
                                 <td><?=$row['domain']?></td>
                                 <td><?=$row['severity']?></td>
+                                <td><?=implode(', ', $row['extra_factors'])?></td>
                                 <td>
                                     <a class="btn" href="<?=rule_path($row)?>">Edit</a>
                                 </td>
