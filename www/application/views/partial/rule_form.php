@@ -29,7 +29,7 @@
 <span class="help-block">The approximate price that this information could go for on the black market.</span>
 
 <label for="broad_rules">Broad Rules</label>
-<textarea name="broad_rules" id="broad_rules" rows="3"><?=implode("\n", get_val($rule, 'broad_rules') ?: array())?></textarea>
+<textarea class="input-block-level" name="broad_rules" id="broad_rules" rows="3"><?=implode("\n", get_val($rule, 'broad_rules') ?: array())?></textarea>
 <span class="help-block">A set of rules to be used against the Gmail IMAP search. Multiple rule should be entered one per line. See Google's documentation of <a href="http://support.google.com/mail/answer/7190?hl=en">advanced Gmail search operators</a> for options. These rules will be <strong>OR'ed</strong> together.</span>
 
 <label for="narrow_rule">Narrow Rule</label>
