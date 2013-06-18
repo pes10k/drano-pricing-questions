@@ -63,10 +63,27 @@ class Rules extends PES_Controller {
         }
     }
 
+    public function build()
+    {
+        $model = new PricingRuleModel();
+        $count = 0;
+
+        foreach ($model->index() as $rule)
+        {
+            if (rule_update_favicon($rule))
+            {
+                $count += 1;
+            }
+        }
+
+        die($count);
+    }
+
     protected function _prepareFields($values) {
 
         $values['narrow_rule_is_regex'] = !empty($values['narrow_rule_is_regex']);
         $values['broad_rules'] = explode("\n", $values['broad_rules']);
+        $values['broad_rules_negation'] = explode("\n", $values['broad_rules_negation']);
         $values['extra_factors'] = explode(',', $values['extra_factors_values']);
         $values['more_email_info'] = empty($values['more_email_info_values'])
             ? array()

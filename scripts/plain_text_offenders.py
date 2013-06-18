@@ -5,7 +5,7 @@ import pprint
 
 
 post_pattern = re.compile('<div class="post clearfix">(.*?)(?=<div class="post clearfix">|<div id="footer">)', re.M | re.S)
-url_reg = re.compile(r'[\w\-\.]+\.(?:com|fr|co\.uk|net|info|org|dk|cz|gov|hu|tv)(?=\W|<|\/)', re.I)
+url_reg = re.compile(r'[\w\-\.]+\.(?:com|fr|co\.uk|net|info|org|dk|cz|gov|hu|tv|il|es|ro)(?=\W|<|\/)', re.I)
 client = MongoClient().drano.pricing_rules
 
 

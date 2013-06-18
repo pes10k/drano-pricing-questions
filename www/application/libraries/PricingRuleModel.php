@@ -89,6 +89,7 @@ class PricingRuleModel extends MongoModel {
             'name',
             'uid',
             'broad_rules',
+            'broad_rules_negation',
             'narrow_rule',
             'narrow_rule_is_regex',
             'domain',

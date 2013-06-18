@@ -32,6 +32,11 @@
 <textarea class="input-block-level" name="broad_rules" id="broad_rules" rows="3"><?=implode("\n", get_val($rule, 'broad_rules') ?: array())?></textarea>
 <span class="help-block">A set of rules to be used against the Gmail IMAP search. Multiple rule should be entered one per line. See Google's documentation of <a href="http://support.google.com/mail/answer/7190?hl=en">advanced Gmail search operators</a> for options. These rules will be <strong>OR'ed</strong> together.</span>
 
+<label for="broad_rules_negation">Broad Negation Rules</label>
+<textarea class="input-block-level" name="broad_rules_negation" id="broad_rules_negation" rows="3"><?=implode("\n", get_val($rule, 'broad_rules_negation') ?: array())?></textarea>
+<span class="help-block">A set of rules, also applied at the IMAP level, that will negate returned results.  Don't bother adding the "-" to the beginning of each rule.</span>
+
+
 <label for="narrow_rule">Narrow Rule</label>
 <input type="text" name="narrow_rule" id="narrow_rule" value="<?=get_val($rule, 'narrow_rule')?>">
 <span class="help-block">The narrow, filtering rule that should be searched for against the body of fetched emails.</span>

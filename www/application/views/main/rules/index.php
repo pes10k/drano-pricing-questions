@@ -26,7 +26,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th></th>
                             <th>Name</th>
                             <th>Domain</th>
                             <th>Severity</th>
@@ -37,7 +37,7 @@
                     <tbody>
                         <?php $index = 0; foreach ($rules as $row): ?>
                             <tr>
-                                <td><?=(++$index)?></td>
+                                <td><?=rule_favicon_tag($row)?></td>
                                 <td><?=$row['name']?></td>
                                 <td><?=$row['domain']?></td>
                                 <td><?=$row['severity']?></td>
